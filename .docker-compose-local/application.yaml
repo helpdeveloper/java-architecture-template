@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+
+  app-db-migration:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    entrypoint: [ "/flyway/flyway" ]
+    command: "-url=jdbc:mysql://database -schemas=sampledb -user=root -password=rpassword -connectRetries=60 migrate -locations=filesystem:/flyway/sql"
+    networks:
+      - database-net
+
+  app:
+    build:
+      context: ../
+      dockerfile: Dockerfile
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      DATABASE_URL: jdbc:mysql://database/sampledb
+      DATABASE_USER: root
+      DATABASE_PASSWORD: rpassword
+      OTEL_EXPORTER_OTLP_METRICS_ENDPOINT: http://otel-collector:4318/v1/metrics
+      OTEL_EXPORTER_OTLP_TRACES_ENDPOINT: http://otel-collector:4318/v1/traces
+    ports:
+      - "8080:8080"
+    depends_on:
+      - app-db-migration
+    networks:
+      - database-net
+      - kafka-net
+      - observability-net
+
+networks:
+  database-net:
+    driver: bridge
+  kafka-net:
+    driver: bridge
+  observability-net:
+    driver: bridge
