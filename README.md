@@ -158,6 +158,28 @@ This approach enhances deployment reliability and maintains a clean separation o
 
 You see the sample how to execute in: [application docker-compose file](.docker-compose-local/application/docker-compose.yml).
 
+### **OpenAPI**
+This project uses **Springdoc OpenAPI** to automatically document REST endpoints.
+
+🔗 [Official OpenAPI site](https://swagger.io/specification/)
+
+#### How to access OpenAPI documentation
+After starting the application, access:
+
+- **Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **OpenAPI specification in JSON**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+
+### **AsyncAPI**
+This project uses **Springwolf** to document asynchronous events (Kafka, RabbitMQ, etc.) with **AsyncAPI**.
+
+🔗 [Official AsyncAPI site](https://www.asyncapi.com/)
+
+#### How to access AsyncAPI documentation
+After starting the application, access:
+
+- **AsyncAPI UI**: [http://localhost:8080/springwolf/asyncapi-ui.html](http://localhost:8080/springwolf/asyncapi-ui.html)
+- **AsyncAPI specification in JSON**: [http://localhost:8080/springwolf/docs](http://localhost:8080/springwolf/docs)
+
 ### **Available Infrastructure**
 
 The local stack also includes infrastructure services to support the application. These services are accessible on `localhost` and provide essential
