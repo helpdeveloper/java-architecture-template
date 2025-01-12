@@ -146,9 +146,31 @@ Essa abordagem melhora a confiabilidade da implantação e mantém uma separaç�
 
 Você pode ver um exemplo de como executar em: [arquivo docker-compose da aplicação](.docker-compose-local/application/docker-compose.yml).
 
+### **OpenAPI**
+Este projeto utiliza o **Springdoc OpenAPI** para documentar automaticamente os endpoints REST.
+
+🔗 [Site oficial da OpenAPI](https://swagger.io/specification/)
+
+#### Como acessar a documentação OpenAPI
+Após iniciar a aplicação, acesse:
+
+- **Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **Especificação OpenAPI em JSON**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+
+### **AsyncAPI**
+Este projeto utiliza o **Springwolf** para documentar eventos assíncronos (Kafka, RabbitMQ, etc.) com **AsyncAPI**.
+
+🔗 [Site oficial da AsyncAPI](https://www.asyncapi.com/)
+
+#### Como acessar a documentação AsyncAPI
+Após iniciar a aplicação, acesse:
+
+- **AsyncAPI UI**: [http://localhost:8080/springwolf/asyncapi-ui.html](http://localhost:8080/springwolf/asyncapi-ui.html)
+- **Especificação AsyncAPI em JSON**: [http://localhost:8080/springwolf/docs](http://localhost:8080/springwolf/docs)
+
 ### **Available Infrastructure**
 
-A pilha local também inclui serviços de infraestrutura para dar suporte ao aplicativo. Esses serviços são acessíveis em `localhost` e fornecem funcionalidades
+A stack local também inclui serviços de infraestrutura para dar suporte ao aplicativo. Esses serviços são acessíveis em `localhost` e fornecem funcionalidades
 essenciais:
 
 - **Grafana**: Visualization and monitoring dashboard, available at [http://localhost:3000](http://localhost:3000).

@@ -1,5 +1,10 @@
 package br.com.helpdev.sample.adapters.output.kafka;
 
+import io.github.springwolf.bindings.kafka.annotations.KafkaAsyncOperationBinding;
+import io.github.springwolf.core.asyncapi.annotations.AsyncMessage;
+import io.github.springwolf.core.asyncapi.annotations.AsyncOperation;
+import io.github.springwolf.core.asyncapi.annotations.AsyncPublisher;
+
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
@@ -19,12 +24,29 @@ class UserEventDispatcher implements UserEventDispatcherPort {
 
    @Override
    public void sendUserCreatedEvent(final User user) {
-      kafkaProducer.send(USER_EVENTS_TOPIC, user.uuid().toString(), UserEvent.ofCreated(user.uuid()).toJson());
+      publish(user, UserEvent.ofCreated(user.uuid()));
    }
 
    @Override
    public void sendUserAddressUpdatedEvent(final User user) {
-      kafkaProducer.send(USER_EVENTS_TOPIC, user.uuid().toString(), UserEvent.ofUpdated(user.uuid()).toJson());
+      publish(user, UserEvent.ofUpdated(user.uuid()));
+   }
+
+   @AsyncPublisher(
+         operation = @AsyncOperation(
+               channelName = USER_EVENTS_TOPIC,
+               description = "Publish user events",
+               message = @AsyncMessage(
+                     name = "UserEvent",
+                     contentType = "application/json",
+                     messageId = "uuid"
+               ),
+               payloadType = UserEvent.class
+         )
+   )
+   @KafkaAsyncOperationBinding(bindingVersion = "1.0.0")
+   void publish(User user, UserEvent userEvent) {
+      kafkaProducer.send(USER_EVENTS_TOPIC, user.uuid().toString(), userEvent.toJson());
    }
 
 }
