@@ -11,7 +11,7 @@ Neste template, fornecemos um **endpoint de cadastro de usuário**, que **dispar
 
 📚 Leia em:
 - 🇬🇧 [English](README.md)
----
+
 
 ## **Architecture**
 
@@ -65,7 +65,7 @@ Esta arquitetura é garantida por meio de testes **ArchUnit**, que validam a con
 
 _Read more about: [Garantindo a arquitetura de uma aplicação sem complexidade](https://medium.com/luizalabs/garantindo-a-arquitetura-de-uma-aplica%C3%A7%C3%A3o-sem-complexidade-6f675653799c)_
 
----
+
 
 ### **Acceptance Tests**
 
@@ -85,7 +85,7 @@ durante seu ciclo de vida. Ver módulo [README](acceptance-test/README.md).
 
 _Leia mais sobre: [Separando os testes integrados de sua aplicação em um novo conceito](https://medium.com/luizalabs/separando-os-testes-integrados-de-sua-aplica%C3%A7%C3%A3o-em-um-novo-conceito-4f511ebb53a4)_
 
----
+
 
 ## **Getting Started**
 
@@ -180,7 +180,7 @@ essenciais:
 - **Kafka**: Event streaming platform, available at `localhost:9092`.
 
 Esses serviços são orquestrados usando o Docker Compose para garantir configuração e operação perfeitas em um ambiente de desenvolvimento local.
----
+
 
 ## **Architectural Decision Records (ADR)**
 O projeto inclui uma pasta dedicada para **Registros de Decisões Arquiteturais (ADR)**, localizada no diretório `adr`. Esta pasta documenta as principais
@@ -188,12 +188,12 @@ decisões arquiteturais tomadas ao longo do projeto, fornecendo contexto, justif
 
 Para saber mais sobre os ADRs e explorar as decisões documentadas, consulte o [README do ADR](./adr/README.md).
 
----
+
 ## **Contribua**
 
 Pull Requests são bem-vindos. Para mudanças significativas, por favor, abra uma issue primeiro para discutir o que você gostaria de mudar. Certifique-se de atualizar os testes conforme apropriado.
 
----
+
 _**Projeto de Template de Arquitetura proposto por Guilherme Biff Zarelli**_
 
 - **Blog/Site**: [https://helpdev.com.br](https://helpdev.com.br)
