@@ -6,8 +6,12 @@ services:
     build:
       context: ../
       dockerfile: Dockerfile
-    entrypoint: [ "mvn" ]
-    command: "flyway:migrate -f /flyway/pom.xml -Dflyway.url=jdbc:mysql://database -Dflyway.schemas=sampledb -Dflyway.user=root -Dflyway.password=rpassword -Dflyway.locations=filesystem:/flyway/db/migration"
+    entrypoint: [ "sh", "-c" ]
+    command: "/flyway/run-migration.sh"
+    environment:
+      DATABASE_URL: jdbc:mysql://database/sampledb
+      DATABASE_USER: root
+      DATABASE_PASSWORD: rpassword
     networks:
       - database-net
 

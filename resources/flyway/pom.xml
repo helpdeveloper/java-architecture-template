@@ -22,7 +22,6 @@
         <flyway.url>jdbc:mysql://localhost:3306</flyway.url>
         <flyway.user>foo</flyway.user>
         <flyway.password>bar</flyway.password>
-        <flyway.schemas>schema</flyway.schemas>
         <flyway.connectRetries>60</flyway.connectRetries>
     </properties>
 
@@ -37,7 +36,6 @@
                     <user>${flyway.user}</user>
                     <password>${flyway.password}</password>
                     <locations>${flyway.locations}</locations>
-                    <schemas>${flyway.schemas}</schemas>
                     <connectRetries>${flyway.connectRetries}</connectRetries>
                 </configuration>
                 <dependencies>

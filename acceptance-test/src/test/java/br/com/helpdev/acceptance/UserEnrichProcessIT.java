@@ -15,9 +15,12 @@ import static com.github.tomakehurst.wiremock.client.WireMock.getRequestedFor;
 import static com.github.tomakehurst.wiremock.client.WireMock.urlPathMatching;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 
 import br.com.helpdev.acceptance.containers.DefaultContainerStarter;
 
+@Execution(ExecutionMode.SAME_THREAD)
 class UserEnrichProcessIT extends DefaultContainerStarter {
 
    @Test

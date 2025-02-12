@@ -36,6 +36,7 @@ RUN ln -s /opt/apache-maven/bin/mvn /usr/bin/mvn
 
 # Copy Migration files to flyway folder
 COPY resources/flyway /flyway
+RUN chmod +x /flyway/run-migration.sh
 
 # Expose the application port
 EXPOSE 8080

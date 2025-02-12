@@ -61,11 +61,12 @@ public abstract class DefaultContainerStarter {
    private static GenericContainer<?> buildFlywayContainerFromApp(final Startable... dependsOn) {
       return new GenericContainer<>(DOCKER_IMAGE_APP)
             .dependsOn(dependsOn)
-            .withCreateContainerCmdModifier(cmd -> cmd.withEntrypoint("/flyway/flyway"))
+            .withCreateContainerCmdModifier(cmd -> cmd.withEntrypoint("sh", "-c"))
             .withNetwork(NETWORK)
-            .withCommand(
-                  "-url=jdbc:mysql://mysqldb:" + MySQLContainer.MYSQL_PORT + "?useSSL=false -schemas=test -user=" + MYSQL_CONTAINER.getUsername()
-                        + " -password=" + MYSQL_CONTAINER.getPassword() + " -connectRetries=60 migrate -locations=filesystem:/flyway/sql")
+            .withCommand("/flyway/run-migration.sh")
+            .withEnv("DATABASE_URL", "jdbc:mysql://mysqldb:" + MySQLContainer.MYSQL_PORT + "/test?autoReconnect=true&useSSL=false")
+            .withEnv("DATABASE_USER", MYSQL_CONTAINER.getUsername())
+            .withEnv("DATABASE_PASSWORD", MYSQL_CONTAINER.getPassword())
             .waitingFor(Wait.forLogMessage("(?s).*No migration necessary(?s).*|(?s).*Successfully applied(?s).*", 1))
             .withLogConsumer(new Slf4jLogConsumer(LoggerFactory.getLogger("FLYWAY")));
    }
