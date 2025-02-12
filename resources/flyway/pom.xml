@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>br.com.helpdev</groupId>
+    <artifactId>flyway-migration</artifactId>
+    <version>1.0.0</version>
+    <name>Flyway Migration</name>
+
+    <description>
+        Sample to run:
+            ./mvnw flyway:migrate -Dflyway.url=jdbc:mysql://localhost:3306 -Dflyway.user=foo -Dflyway.password=bar -Dflyway.schemas=schema
+    </description>
+
+    <properties>
+        <mysql-connector-j.version>8.4.0</mysql-connector-j.version>
+        <flyway-maven-plugin.version>11.3.1</flyway-maven-plugin.version>
+
+        <!-- Flyway Configuration -->
+        <flyway.locations>filesystem:db/migration</flyway.locations>
+        <flyway.url>jdbc:mysql://localhost:3306</flyway.url>
+        <flyway.user>foo</flyway.user>
+        <flyway.password>bar</flyway.password>
+        <flyway.schemas>schema</flyway.schemas>
+        <flyway.connectRetries>60</flyway.connectRetries>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>${flyway-maven-plugin.version}</version>
+                <configuration>
+                    <url>${flyway.url}</url>
+                    <user>${flyway.user}</user>
+                    <password>${flyway.password}</password>
+                    <locations>${flyway.locations}</locations>
+                    <schemas>${flyway.schemas}</schemas>
+                    <connectRetries>${flyway.connectRetries}</connectRetries>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.flywaydb</groupId>
+                        <artifactId>flyway-mysql</artifactId>
+                        <version>${flyway-maven-plugin.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.mysql</groupId>
+                        <artifactId>mysql-connector-j</artifactId>
+                        <version>${mysql-connector-j.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>

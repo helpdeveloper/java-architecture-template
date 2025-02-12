@@ -144,16 +144,25 @@ Principais Características:
 
 Essa abordagem melhora a confiabilidade da implantação e mantém uma separação clara de responsabilidades, alinhando-se aos princípios arquitetônicos do projeto.
 
-Você pode ver um exemplo de como executar em: [arquivo docker-compose da aplicação](.docker-compose-local/application/docker-compose.yml).
+Você pode ver um exemplo de como executar em: [arquivo docker-compose da aplicação](.docker-compose-local/application.yaml).
 
 ### **Available Infrastructure**
 
 A pilha local também inclui serviços de infraestrutura para dar suporte ao aplicativo. Esses serviços são acessíveis em `localhost` e fornecem funcionalidades
 essenciais:
 
+#### Observability Services
+
+Veja a stack: [docker-compose-observability.yaml](.docker-compose-local/observability.yaml)
+
 - **Grafana**: Visualization and monitoring dashboard, available at [http://localhost:3000](http://localhost:3000).
 - **Prometheus**: Metrics collection and monitoring system, available at [http://localhost:9090](http://localhost:9090).
 - **Jaeger**: Distributed tracing system, available at [http://localhost:16686](http://localhost:16686).
+
+#### Infrastructure Services
+
+Veja a stack: [docker-compose-infrastructure.yaml](.docker-compose-local/infrastructure.yaml)
+
 - **MySQL**: Relational database system, accessible at `localhost:3306`.
 - **Kafka**: Event streaming platform, available at `localhost:9092`.
 

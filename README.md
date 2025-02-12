@@ -156,16 +156,25 @@ Key Features:
 
 This approach enhances deployment reliability and maintains a clean separation of concerns, aligning with the project's architectural principles.
 
-You see the sample how to execute in: [application docker-compose file](.docker-compose-local/application/docker-compose.yml).
+You see the sample how to execute in: [application docker-compose file](.docker-compose-local/application.yaml).
 
 ### **Available Infrastructure**
 
 The local stack also includes infrastructure services to support the application. These services are accessible on `localhost` and provide essential
 functionalities:
 
+#### Observability Services
+
+See the stack: [docker-compose-observability.yaml](.docker-compose-local/observability.yaml)
+
 - **Grafana**: Visualization and monitoring dashboard, available at [http://localhost:3000](http://localhost:3000).
 - **Prometheus**: Metrics collection and monitoring system, available at [http://localhost:9090](http://localhost:9090).
 - **Jaeger**: Distributed tracing system, available at [http://localhost:16686](http://localhost:16686).
+
+#### Infrastructure Services
+
+See the stack: [docker-compose-infrastructure.yaml](.docker-compose-local/infrastructure.yaml)
+
 - **MySQL**: Relational database system, accessible at `localhost:3306`.
 - **Kafka**: Event streaming platform, available at `localhost:9092`.
 
