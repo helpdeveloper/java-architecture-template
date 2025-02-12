@@ -12,7 +12,7 @@ In this template, we provide a user registration endpoint that triggers an event
 
 📖 Read this in:
 - 🇧🇷 [Português](README.pt.md)
----
+
 
 ## **Architecture**
 
@@ -71,7 +71,7 @@ guaranteeing the separation of concerns and the independence of the core busines
 
 _Read more about: [Garantindo a arquitetura de uma aplicação sem complexidade](https://medium.com/luizalabs/garantindo-a-arquitetura-de-uma-aplica%C3%A7%C3%A3o-sem-complexidade-6f675653799c)_
 
----
+
 
 ### **Acceptance Tests**
 
@@ -94,7 +94,7 @@ during its lifecycle. View module [README](acceptance-test/README.md).
 
 _Read more about: [Separando os testes integrados de sua aplicação em um novo conceito](https://medium.com/luizalabs/separando-os-testes-integrados-de-sua-aplica%C3%A7%C3%A3o-em-um-novo-conceito-4f511ebb53a4)_
 
----
+
 
 ## **Getting Started**
 
@@ -158,6 +158,28 @@ This approach enhances deployment reliability and maintains a clean separation o
 
 You see the sample how to execute in: [application docker-compose file](.docker-compose-local/application.yaml).
 
+### **OpenAPI**
+This project uses **Springdoc OpenAPI** to automatically document REST endpoints.
+
+🔗 [Official OpenAPI site](https://swagger.io/specification/)
+
+#### How to access OpenAPI documentation
+After starting the application, access:
+
+- **Swagger UI**: [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+- **OpenAPI specification in JSON**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+
+### **AsyncAPI**
+This project uses **Springwolf** to document asynchronous events (Kafka, RabbitMQ, etc.) with **AsyncAPI**.
+
+🔗 [Official AsyncAPI site](https://www.asyncapi.com/)
+
+#### How to access AsyncAPI documentation
+After starting the application, access:
+
+- **AsyncAPI UI**: [http://localhost:8080/springwolf/asyncapi-ui.html](http://localhost:8080/springwolf/asyncapi-ui.html)
+- **AsyncAPI specification in JSON**: [http://localhost:8080/springwolf/docs](http://localhost:8080/springwolf/docs)
+
 ### **Available Infrastructure**
 
 The local stack also includes infrastructure services to support the application. These services are accessible on `localhost` and provide essential
@@ -180,7 +202,7 @@ See the stack: [docker-compose-infrastructure.yaml](.docker-compose-local/infras
 
 These services are orchestrated using Docker Compose to ensure seamless setup and operation in a local development environment.
 
----
+
 
 ## **Architectural Decision Records (ADR)**
 
@@ -189,13 +211,13 @@ architectural decisions made throughout the project, providing context, rational
 
 To learn more about the ADRs and explore the documented decisions, refer to the [ADR README](./adr/README.md).
 
----
+
 ## **Contribute**
 
 Pull Requests are welcome. For significant changes, please open an issue first to discuss what you would like to change. Make sure to update tests as
 appropriate.
 
----
+
 _**Architecture Template Project proposed by Guilherme Biff Zarelli**_
 
 - **Blog/Site**: [https://helpdev.com.br](https://helpdev.com.br)
