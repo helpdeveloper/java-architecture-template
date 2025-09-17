@@ -2,7 +2,7 @@
 FROM openjdk:21-jdk-slim AS build
 
 # Install specific Maven version (e.g., 3.x.x)
-ARG MAVEN_VERSION=3.9.9
+ARG MAVEN_VERSION=3.9.11
 RUN apt-get update && apt-get install -y curl \
     && curl -kfsSL https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz -o maven.tar.gz \
     && tar -xzf maven.tar.gz -C /opt \
