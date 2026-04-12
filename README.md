@@ -206,10 +206,10 @@ These services are orchestrated using Docker Compose to ensure seamless setup an
 
 ## **Architectural Decision Records (ADR)**
 
-The project includes a dedicated folder for **Architectural Decision Records (ADR)**, located in the `adr` directory. This folder documents key
+The project includes a dedicated folder for **Architectural Decision Records (ADR)**, located in the `docs/adr` directory. This folder documents key
 architectural decisions made throughout the project, providing context, rationale, and implications for these choices.
 
-To learn more about the ADRs and explore the documented decisions, refer to the [ADR README](./adr/README.md).
+To learn more about the ADRs and explore the documented decisions, refer to the [ADR README](./docs/adr/README.md).
 
 
 ## **Contribute**
