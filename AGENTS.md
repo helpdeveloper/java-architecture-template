@@ -55,8 +55,9 @@ Then route to the relevant artifact skill:
 
 ## Implementation Skills
 
-Use these repository-native skills for common delivery workflows:
+Use these repository-native skills for common delivery workflows. For new production behavior, start with `.agents/skills/tdd-loop/SKILL.md` and then layer on the more specialized skills below as needed.
 
+- `.agents/skills/tdd-loop/SKILL.md` for driving new code implementation through a red-green-refactor loop
 - `.agents/skills/hexagon-scaffold/SKILL.md` for adding a new feature slice across core, ports, adapters, and tests
 - `.agents/skills/archunit-guard/SKILL.md` for diagnosing or preserving architecture rules enforced by ArchUnit
 - `.agents/skills/acceptance-scenario-scaffold/SKILL.md` for black-box acceptance coverage in the `acceptance-test/` module
