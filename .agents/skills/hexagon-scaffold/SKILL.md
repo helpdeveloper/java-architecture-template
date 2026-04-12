@@ -34,13 +34,14 @@ Use when you need to add a new business capability that should follow the reposi
 
 ## Workflow
 
-1. Start in the core: define domain records or value objects and the smallest input or output port set that expresses the use case.
-2. Implement package-private use cases that implement input ports and depend only on output ports and domain types.
-3. Add inbound adapters that translate transport concerns into the input-port API.
-4. Add outbound adapters that implement output ports and keep framework details out of the core.
-5. Add mapper, DTO, and entity layers only where boundaries require them.
-6. Mirror existing patterns before inventing new ones: `UserCreatorUseCase`, `UserController`, `UserRepository`, `AddressClient`, and `UserEventDispatcher`.
-7. Add focused unit tests and let `archunit-guard` verify the structure.
+1. Start with `tdd-loop`: pick the smallest failing test that describes the next behavior increment, preferably in the core.
+2. Define domain records or value objects and the smallest input or output port set that expresses the use case.
+3. Implement package-private use cases that implement input ports and depend only on output ports and domain types.
+4. Add inbound adapters that translate transport concerns into the input-port API.
+5. Add outbound adapters that implement output ports and keep framework details out of the core.
+6. Add mapper, DTO, and entity layers only where boundaries require them.
+7. Mirror existing patterns before inventing new ones: `UserCreatorUseCase`, `UserController`, `UserRepository`, `AddressClient`, and `UserEventDispatcher`.
+8. Keep the red-green-refactor cycle tight: make the smallest production change for the current failing test, then let `archunit-guard` verify the structure.
 
 ## Output Shape
 
@@ -48,7 +49,7 @@ Use when you need to add a new business capability that should follow the reposi
 2. Input and output ports with the `Port` suffix
 3. Package-private use case implementations with the `UseCase` suffix
 4. Adapter implementations, DTOs or entities, and mappers only where needed
-5. Unit test coverage for core logic and adapter boundaries
+5. Unit test coverage for core logic and adapter boundaries, written first through the TDD loop
 
 ## Rules
 
