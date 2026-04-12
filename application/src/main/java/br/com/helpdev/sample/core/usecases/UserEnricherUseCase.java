@@ -8,6 +8,7 @@ import br.com.helpdev.sample.core.domain.exceptions.UserNotFoundException;
 import br.com.helpdev.sample.core.ports.input.UserEnricherPort;
 import br.com.helpdev.sample.core.ports.output.AddressClientPort;
 import br.com.helpdev.sample.core.ports.output.AddressRepositoryPort;
+import br.com.helpdev.sample.core.ports.output.UserCompletedIntegrationPublisherPort;
 import br.com.helpdev.sample.core.ports.output.UserEventDispatcherPort;
 import br.com.helpdev.sample.core.ports.output.UserRepositoryPort;
 
@@ -18,14 +19,18 @@ class UserEnricherUseCase implements UserEnricherPort {
 
    private final UserEventDispatcherPort userEventDispatcherPort;
 
+   private final UserCompletedIntegrationPublisherPort userCompletedIntegrationPublisherPort;
+
    private final AddressClientPort addressClientPort;
 
    private final AddressRepositoryPort addressRepositoryPort;
 
    UserEnricherUseCase(final UserRepositoryPort userRepositoryPort, final UserEventDispatcherPort userEventDispatcherPort,
+         final UserCompletedIntegrationPublisherPort userCompletedIntegrationPublisherPort,
          final AddressClientPort addressClientPort, final AddressRepositoryPort addressRepositoryPort) {
       this.userRepositoryPort = userRepositoryPort;
       this.userEventDispatcherPort = userEventDispatcherPort;
+      this.userCompletedIntegrationPublisherPort = userCompletedIntegrationPublisherPort;
       this.addressClientPort = addressClientPort;
       this.addressRepositoryPort = addressRepositoryPort;
    }
@@ -37,6 +42,7 @@ class UserEnricherUseCase implements UserEnricherPort {
       final var savedAddress = addressRepositoryPort.save(user, address);
       final var userWithAddress = user.withAddress(savedAddress);
       userEventDispatcherPort.sendUserAddressUpdatedEvent(userWithAddress);
+      userCompletedIntegrationPublisherPort.sendUserCompletedPayload(userWithAddress);
    }
 
 }

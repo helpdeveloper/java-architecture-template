@@ -6,6 +6,9 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 import static io.restassured.RestAssured.given;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.Matchers.nullValue;
@@ -48,9 +51,21 @@ class UserEnrichProcessIT extends DefaultContainerStarter {
                .statusCode(200)
                .body("name", equalTo("John Doe"))
                .body("email", equalTo("d9D0r@example.com"))
-               .body("birth_date", equalTo("1990-01-01"))
-               .body("address", notNullValue());
+                .body("birth_date", equalTo("1990-01-01"))
+                .body("address", notNullValue());
       });
+
+      waitAtMost(10, SECONDS).untilAsserted(() -> assertEquals(1, getRabbitMqQueueMessageCount(USER_COMPLETED_QUEUE)));
+
+      final var userUuid = locationValue.substring(locationValue.lastIndexOf('/') + 1);
+      final var rabbitMqPayload = getSingleRabbitMqQueueMessage(USER_COMPLETED_QUEUE);
+
+      assertNotNull(rabbitMqPayload);
+      assertTrue(rabbitMqPayload.contains("\"uuid\":\"" + userUuid + "\""));
+      assertTrue(rabbitMqPayload.contains("\"name\":\"John Doe\""));
+      assertTrue(rabbitMqPayload.contains("\"email\":\"d9D0r@example.com\""));
+      assertTrue(rabbitMqPayload.contains("\"city\":\"East Nadia\""));
+      assertTrue(rabbitMqPayload.contains("\"country\":\"Reunion\""));
    }
 
    @Test
@@ -79,6 +94,8 @@ class UserEnrichProcessIT extends DefaultContainerStarter {
             .body("email", equalTo("d9D0r@example.com"))
             .body("birth_date", equalTo("1990-01-01"))
             .body("address", nullValue());
+
+      assertEquals(0, getRabbitMqQueueMessageCount(USER_COMPLETED_QUEUE));
    }
 
 }
