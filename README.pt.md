@@ -6,8 +6,9 @@
 
 Aqui você deve descrever seu projeto, seu funcionamento e seus objetivos, tornando-o claro para todos. Exemplo:
 
-O **Java Architecture Template** é um projeto criado para servir como modelo na criação de aplicações, visando um desenvolvimento com **qualidade técnica excepcional** para garantir **manutenção a longo prazo**.  
-Neste template, fornecemos um **endpoint de cadastro de usuário**, que **dispara um evento no broker** quando um usuário é registrado. Um **listener recebe esses eventos** de criação e os enriquece com dados de endereço.
+O **Java Architecture Template** é um projeto criado para servir como modelo na criação de aplicações, visando um desenvolvimento com **qualidade técnica excepcional** para garantir **manutenção a longo prazo**.
+Neste template, fornecemos um **endpoint de cadastro de usuário** que publica um **CloudEvent** no Kafka quando um usuário é registrado. Um
+**listener consome CloudEvents** do tipo `br.com.helpdev.sample.user.created` e enriquece o usuário com dados de endereço.
 
 📚 Leia em:
 - 🇬🇧 [English](README.md)
@@ -159,6 +160,7 @@ Após iniciar a aplicação, acesse:
 
 ### **AsyncAPI**
 Este projeto utiliza o **Springwolf** para documentar eventos assíncronos (Kafka, RabbitMQ, etc.) com **AsyncAPI**.
+As mensagens Kafka no tópico `user-events` seguem o formato **CloudEvents structured JSON** (`application/cloudevents+json`).
 
 🔗 [Site oficial da AsyncAPI](https://www.asyncapi.com/)
 

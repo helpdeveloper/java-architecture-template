@@ -6,9 +6,10 @@
 
 Here you will describe this project, what it does, and its goals, making it clear to everyone. Example:
 
-The **Java Architecture Template** is a project designed to serve as a template for creating applications, aiming for development with exceptional 
-technical quality to ensure long-term maintainability. 
-In this template, we provide a user registration endpoint that triggers an event in the broker when a user is registered. A listener will receive these creation events and enrich them with address data.
+The **Java Architecture Template** is a project designed to serve as a template for creating applications, aiming for development with exceptional
+technical quality to ensure long-term maintainability.
+In this template, we provide a user registration endpoint that publishes a **CloudEvent** to Kafka when a user is registered. A listener consumes
+CloudEvents of type `br.com.helpdev.sample.user.created` and enriches the user with address data.
 
 📖 Read this in:
 - 🇧🇷 [Português](README.pt.md)
@@ -171,6 +172,7 @@ After starting the application, access:
 
 ### **AsyncAPI**
 This project uses **Springwolf** to document asynchronous events (Kafka, RabbitMQ, etc.) with **AsyncAPI**.
+Kafka messages on the `user-events` topic follow the **CloudEvents structured JSON** format (`application/cloudevents+json`).
 
 🔗 [Official AsyncAPI site](https://www.asyncapi.com/)
 

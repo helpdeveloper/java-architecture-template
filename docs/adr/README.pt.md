@@ -40,6 +40,7 @@ Siga estes passos ao criar um novo ADR:
 | 0001 | [Adotar REST para Comunicação de API](0001-adopt-rest-for-api-communication.md) | Aceito    | 2024-12-31 |
 | 0002 | [Usar MySQL como Banco de Dados Primário](0002-use-mysql.md)                      | Aceito    | 2024-12-31 |
 | 0003 | [Usar Kafka para Streaming de Eventos](0003-use-kafka-for-event-streaming.md)  | Aceito    | 2024-12-31 |
+| 0004 | [Usar CloudEvents como Contrato de Eventos do Kafka](0004-use-cloudevents-as-the-kafka-event-contract.md) | Aceito    | 2026-04-12 |
 
 ---
 
@@ -53,4 +54,3 @@ Consulte o arquivo [Modelo de ADR](template.md) para criar novos ADRs.
 
 - [O que é um ADR?](https://adr.github.io/)
 - [Modelos e Exemplos de ADR](https://github.com/joelparkerhenderson/architecture_decision_record)
-
