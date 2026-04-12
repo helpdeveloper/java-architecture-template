@@ -192,10 +192,10 @@ Esses serviços são orquestrados usando o Docker Compose para garantir configur
 
 
 ## **Architectural Decision Records (ADR)**
-O projeto inclui uma pasta dedicada para **Registros de Decisões Arquiteturais (ADR)**, localizada no diretório `adr`. Esta pasta documenta as principais
+O projeto inclui uma pasta dedicada para **Registros de Decisões Arquiteturais (ADR)**, localizada no diretório `docs/adr`. Esta pasta documenta as principais
 decisões arquiteturais tomadas ao longo do projeto, fornecendo contexto, justificativa e implicações para essas escolhas.
 
-Para saber mais sobre os ADRs e explorar as decisões documentadas, consulte o [README do ADR](./adr/README.md).
+Para saber mais sobre os ADRs e explorar as decisões documentadas, consulte o [README do ADR](./docs/adr/README.md).
 
 
 ## **Contribua**
