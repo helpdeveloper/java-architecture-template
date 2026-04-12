@@ -199,6 +199,7 @@ See the stack: [docker-compose-infrastructure.yaml](.docker-compose-local/infras
 
 - **MySQL**: Relational database system, accessible at `localhost:3306`.
 - **Kafka**: Event streaming platform, available at `localhost:9092`.
+- **RabbitMQ**: Integration messaging broker, available at `localhost:5672` with the management UI at [http://localhost:15672](http://localhost:15672).
 
 These services are orchestrated using Docker Compose to ensure seamless setup and operation in a local development environment.
 

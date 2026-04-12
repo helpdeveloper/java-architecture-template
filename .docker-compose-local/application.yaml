@@ -21,6 +21,10 @@ services:
       dockerfile: Dockerfile
     environment:
       KAFKA_BOOTSTRAP_SERVERS: kafka:29092
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: user
+      SPRING_RABBITMQ_PASSWORD: password
       DATABASE_URL: jdbc:mysql://database/sampledb
       DATABASE_USER: root
       DATABASE_PASSWORD: rpassword

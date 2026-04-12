@@ -42,6 +42,7 @@ Follow these steps when creating a new ADR:
 | 0001 | [Adopt REST for API Communication](0001-adopt-rest-for-api-communication.md) | Accepted  | 2024-12-31 |
 | 0002 | [Use MySQL as the Primary Database](0002-use-mysql.md)                       | Accepted  | 2024-12-31 |
 | 0003 | [Use Kafka for Event Streaming](0003-use-kafka-for-event-streaming.md)       | Accepted  | 2024-12-31 |
+| 0004 | [Use RabbitMQ for Integration Payload Delivery](0004-use-rabbitmq-for-integration-payload-delivery.md) | Accepted  | 2026-04-12 |
 
 ---
 

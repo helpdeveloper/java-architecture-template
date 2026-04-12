@@ -48,6 +48,11 @@
         </dependency>
         <dependency>
             <groupId>io.github.springwolf</groupId>
+            <artifactId>springwolf-amqp</artifactId>
+            <version>${springwolf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.springwolf</groupId>
             <artifactId>springwolf-ui</artifactId>
             <version>${springwolf.version}</version>
         </dependency>
@@ -84,6 +89,10 @@
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
 
         <!-- Observability Dependencies -->

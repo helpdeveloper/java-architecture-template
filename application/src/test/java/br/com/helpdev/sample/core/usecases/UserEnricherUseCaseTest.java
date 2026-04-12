@@ -4,9 +4,10 @@ import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.mockito.Mockito.inOrder;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoInteractions;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,6 +22,7 @@ import br.com.helpdev.sample.core.domain.entities.User;
 import br.com.helpdev.sample.core.domain.exceptions.UserNotFoundException;
 import br.com.helpdev.sample.core.domain.vo.Email;
 import br.com.helpdev.sample.core.ports.output.AddressClientPort;
+import br.com.helpdev.sample.core.ports.output.UserCompletedIntegrationPublisherPort;
 import br.com.helpdev.sample.core.ports.output.AddressRepositoryPort;
 import br.com.helpdev.sample.core.ports.output.UserEventDispatcherPort;
 import br.com.helpdev.sample.core.ports.output.UserRepositoryPort;
@@ -33,6 +35,9 @@ class UserEnricherUseCaseTest {
 
    @Mock
    private UserEventDispatcherPort userEventDispatcherPort;
+
+   @Mock
+   private UserCompletedIntegrationPublisherPort userCompletedIntegrationPublisherPort;
 
    @Mock
    private AddressClientPort addressClientPort;
@@ -61,6 +66,8 @@ class UserEnricherUseCaseTest {
       when(userRepositoryPort.findByUuid(userUuid)).thenReturn(Optional.empty());
 
       assertThrows(UserNotFoundException.class, () -> userEnricherUseCase.enrichUser(userUuid));
+
+      verifyNoInteractions(addressClientPort, addressRepositoryPort, userEventDispatcherPort, userCompletedIntegrationPublisherPort);
    }
 
    @Test
@@ -71,9 +78,12 @@ class UserEnricherUseCaseTest {
 
       userEnricherUseCase.enrichUser(userUuid);
 
+      final var userWithAddress = user.withAddress(address);
       verify(userRepositoryPort).findByUuid(userUuid);
       verify(addressClientPort).findUserAddress(user);
       verify(addressRepositoryPort).save(user, address);
-      verify(userEventDispatcherPort).sendUserAddressUpdatedEvent(any(User.class));
+      final var inOrder = inOrder(userEventDispatcherPort, userCompletedIntegrationPublisherPort);
+      inOrder.verify(userEventDispatcherPort).sendUserAddressUpdatedEvent(userWithAddress);
+      inOrder.verify(userCompletedIntegrationPublisherPort).sendUserCompletedPayload(userWithAddress);
    }
 }
