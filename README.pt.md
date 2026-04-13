@@ -16,6 +16,8 @@ Neste template, fornecemos um **endpoint de cadastro de usuário** que publica u
 
 ## **Architecture**
 
+**Skill relacionada:** [`hexagon-scaffold`](.agents/skills/hexagon-scaffold/SKILL.md) para adicionar novas fatias de funcionalidade seguindo a estrutura hexagonal do template.
+
 Este projeto segue a **Arquitetura Hexagonal**, conforme proposta por **Alistair Cockburn**, focando em **desacoplar a lógica de negócio principal da aplicação de seus mecanismos de entrada e saída**. Esse princípio de design promove **adaptabilidade, testabilidade e sustentabilidade**, encapsulando a camada de aplicação (núcleo de negócio) e expondo portas definidas para interação com sistemas externos.
 
 <p align="center">
@@ -62,6 +64,8 @@ acceptance-test
 
 ### **Architecture Tests**
 
+**Skill relacionada:** [`archunit-guard`](.agents/skills/archunit-guard/SKILL.md) para preservar e evoluir com segurança as regras de arquitetura do repositório.
+
 Esta arquitetura é garantida por meio de testes **ArchUnit**, que validam a conformidade do projeto com os princípios da Arquitetura Hexagonal, assegurando a separação de responsabilidades e a independência da lógica de negócio central em relação aos sistemas externos.
 
 _Read more about: [Garantindo a arquitetura de uma aplicação sem complexidade](https://medium.com/luizalabs/garantindo-a-arquitetura-de-uma-aplica%C3%A7%C3%A3o-sem-complexidade-6f675653799c)_
@@ -69,6 +73,8 @@ _Read more about: [Garantindo a arquitetura de uma aplicação sem complexidade]
 
 
 ### **Acceptance Tests**
+
+**Skill relacionada:** [`acceptance-scenario-scaffold`](.agents/skills/acceptance-scenario-scaffold/SKILL.md) para cenários black-box baseados em Docker no módulo `acceptance-test/`.
 
 Para garantir testes robustos, o módulo **acceptance-test** encapsula a aplicação dentro de uma imagem Docker e executa testes de integração em um ambiente que imita de perto o comportamento real da aplicação. Essa abordagem garante a homogeneidade nos módulos da aplicação ao restringir os testes unitários ao módulo principal, enquanto lida com testes de integração separadamente no módulo acceptance-test.
 Esta separação garante:
@@ -135,6 +141,8 @@ Esta configuração garante uma experiência de desenvolvimento eficiente e cons
 
 ### **The Flyway Database Migration Tool**
 
+**Skill relacionada:** [`flyway-decoupled`](.agents/skills/flyway-decoupled/SKILL.md) para migrações versionadas, wiring do Flyway e ordenação de startup.
+
 Para garantir um melhor desempenho de inicialização e evitar problemas de concorrência em ambientes Kubernetes, o **Flyway** foi implementado como uma ferramenta de migração de banco de dados desacoplada. Este design permite que o processo de migração seja executado de forma independente da aplicação.
 
 Principais Características:
@@ -148,6 +156,8 @@ Essa abordagem melhora a confiabilidade da implantação e mantém uma separaç�
 Você pode ver um exemplo de como executar em: [arquivo docker-compose da aplicação](.docker-compose-local/application.yaml).
 
 ### **OpenAPI**
+**Skill relacionada:** [`api-doc-auditor`](.agents/skills/api-doc-auditor/SKILL.md) para manter a documentação gerada da API alinhada com o código-fonte.
+
 Este projeto utiliza o **Springdoc OpenAPI** para documentar automaticamente os endpoints REST.
 
 🔗 [Site oficial da OpenAPI](https://swagger.io/specification/)
@@ -159,6 +169,8 @@ Após iniciar a aplicação, acesse:
 - **Especificação OpenAPI em JSON**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 
 ### **AsyncAPI**
+**Skill relacionada:** [`api-doc-auditor`](.agents/skills/api-doc-auditor/SKILL.md) para manter contratos assíncronos e documentação gerada alinhados com o código-fonte.
+
 Este projeto utiliza o **Springwolf** para documentar eventos assíncronos (Kafka, RabbitMQ, etc.) com **AsyncAPI**.
 As mensagens Kafka no tópico `user-events` seguem o formato **CloudEvents structured JSON** (`application/cloudevents+json`).
 
@@ -177,6 +189,8 @@ essenciais:
 
 #### Observability Services
 
+**Skill relacionada:** [`observability`](.agents/skills/observability/SKILL.md) para a stack local de OpenTelemetry, Prometheus, Grafana e Jaeger.
+
 Veja a stack: [docker-compose-observability.yaml](.docker-compose-local/observability.yaml)
 
 - **Grafana**: Visualization and monitoring dashboard, available at [http://localhost:3000](http://localhost:3000).
@@ -193,11 +207,26 @@ Veja a stack: [docker-compose-infrastructure.yaml](.docker-compose-local/infrast
 Esses serviços são orquestrados usando o Docker Compose para garantir configuração e operação perfeitas em um ambiente de desenvolvimento local.
 
 
-## **Architectural Decision Records (ADR)**
-O projeto inclui uma pasta dedicada para **Registros de Decisões Arquiteturais (ADR)**, localizada no diretório `docs/adr`. Esta pasta documenta as principais
-decisões arquiteturais tomadas ao longo do projeto, fornecendo contexto, justificativa e implicações para essas escolhas.
+## **Docs**
 
-Para saber mais sobre os ADRs e explorar as decisões documentadas, consulte o [README do ADR](./docs/adr/README.md).
+**Skills relacionadas:** [`docs`](.agents/skills/docs/SKILL.md) como entrada, depois [`docs-spec`](.agents/skills/docs-spec/SKILL.md), [`docs-adr`](.agents/skills/docs-adr/SKILL.md), [`docs-design-doc`](.agents/skills/docs-design-doc/SKILL.md), [`docs-runbook`](.agents/skills/docs-runbook/SKILL.md) e [`docs-selective-persistence`](.agents/skills/docs-selective-persistence/SKILL.md).
+
+Este template trata a documentação como uma parte ativa da entrega, guiada por skills do repositório em vez de arquivos criados de forma ad hoc. O ponto
+de entrada é `.agents/skills/docs/SKILL.md`, que decide se a mudança precisa de documentação durável, se um documento existente deve ser atualizado, ou se
+explicitamente nenhum novo documento é necessário.
+
+O fluxo funciona assim:
+
+1. Primeiro, o escopo é esclarecido por definição, spec ou plan mode.
+2. Depois, a necessidade é roteada para o artefato correto:
+   - **Spec** para escopo, cenários, restrições e critérios de aceite (`docs/specs/`, quando existir).
+   - **ADR** para decisões arquiteturais duráveis e guardrails em [`docs/adr/`](./docs/adr/README.md).
+   - **Design Doc** para estrutura não trivial, integrações, migrações ou riscos em [`docs/design/`](./docs/design/README.md).
+   - **Runbook** para operação, rollout, rollback, suporte e incidentes (`docs/runbooks/`, quando existir).
+3. Quando necessários, ADRs e design docs são escritos e alinhados antes do início da implementação.
+4. Após o planejamento ou a execução, `docs-selective-persistence` decide o que permanece durável e o que deve continuar transitório.
+
+Com isso, a documentação fica enxuta, orientada a decisão e conectada à execução, em vez de transformar toda conversa em artefato permanente.
 
 
 ## **Contribua**

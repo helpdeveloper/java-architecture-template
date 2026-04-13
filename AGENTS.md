@@ -62,6 +62,8 @@ Use these repository-native skills for common delivery workflows. For new produc
 - `.agents/skills/archunit-guard/SKILL.md` for diagnosing or preserving architecture rules enforced by ArchUnit
 - `.agents/skills/acceptance-scenario-scaffold/SKILL.md` for black-box acceptance coverage in the `acceptance-test/` module
 - `.agents/skills/api-doc-auditor/SKILL.md` for keeping OpenAPI and AsyncAPI output aligned with source code
+- `.agents/skills/flyway-decoupled/SKILL.md` for decoupled database migration scripts, runner wiring, and startup ordering
+- `.agents/skills/observability/SKILL.md` for local OpenTelemetry, Prometheus, Grafana, and Jaeger stack wiring
 
 ## Documentation Conventions
 
