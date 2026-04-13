@@ -243,6 +243,8 @@ The flow works like this:
 
 This keeps documentation lean, decision-oriented, and connected to execution instead of turning every discussion into a permanent artifact.
 
+Read more about this perspective in [Documentacao na era da IA: quando a documentacao vira contexto de execucao](https://medium.com/@guilherme.zarelli/documenta%C3%A7%C3%A3o-na-era-da-ia-quando-a-documenta%C3%A7%C3%A3o-vira-contexto-de-execu%C3%A7%C3%A3o-cb8d6fdf84ed) _(Portuguese)_.
+
 
 ## **Contribute**
 
