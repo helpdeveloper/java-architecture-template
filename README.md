@@ -17,6 +17,8 @@ CloudEvents of type `br.com.helpdev.sample.user.created` and enriches the user w
 
 ## **Architecture**
 
+**Related skill:** [`hexagon-scaffold`](.agents/skills/hexagon-scaffold/SKILL.md) for adding feature slices that follow the template's hexagonal structure.
+
 This project follows the **Hexagonal Architecture**, as proposed by Alistair Cockburn, focuses on **decoupling the application’s core business logic from its input and output
 mechanisms**. This design principle promotes adaptability, testability, and sustainability by encapsulating the application layer (business core) and
 exposing defined ports for interactions with external systems.
@@ -65,6 +67,8 @@ acceptance-test
 
 ### **Architecture Tests**
 
+**Related skill:** [`archunit-guard`](.agents/skills/archunit-guard/SKILL.md) for preserving and evolving the repository's architecture rules safely.
+
 This architecture is warranted by [**ArchUnit tests**](application/src/test/java/br/com/helpdev/sample/ArchitectureTest.java) to ensure the project's
 compliance with the defined structure.
 These tests validate the project's adherence to the Hexagonal Architecture principles,
@@ -75,6 +79,8 @@ _Read more about: [Garantindo a arquitetura de uma aplicação sem complexidade]
 
 
 ### **Acceptance Tests**
+
+**Related skill:** [`acceptance-scenario-scaffold`](.agents/skills/acceptance-scenario-scaffold/SKILL.md) for Docker-based black-box scenarios in the `acceptance-test/` module.
 
 To ensure robust testing, the **acceptance-test** module encapsulates the application within a Docker image and executes integration tests in an
 environment that closely mimics the real-world behavior of the application. This approach guarantees homogeneity in the application modules by
@@ -145,6 +151,8 @@ environment.
 
 ### **The Flyway Database Migration Tool**
 
+**Related skill:** [`flyway-decoupled`](.agents/skills/flyway-decoupled/SKILL.md) for versioned migrations, Flyway runner wiring, and startup ordering.
+
 To ensure better startup performance and avoid concurrency issues in Kubernetes environments, **Flyway** has been implemented as a decoupled database
 migration tool. This design enables the migration process to run independently of the application.
 
@@ -160,6 +168,9 @@ This approach enhances deployment reliability and maintains a clean separation o
 You see the sample how to execute in: [application docker-compose file](.docker-compose-local/application.yaml).
 
 ### **OpenAPI**
+
+**Related skill:** [`api-doc-auditor`](.agents/skills/api-doc-auditor/SKILL.md) for keeping generated API documentation aligned with the source code.
+
 This project uses **Springdoc OpenAPI** to automatically document REST endpoints.
 
 🔗 [Official OpenAPI site](https://swagger.io/specification/)
@@ -171,6 +182,9 @@ After starting the application, access:
 - **OpenAPI specification in JSON**: [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
 
 ### **AsyncAPI**
+
+**Related skill:** [`api-doc-auditor`](.agents/skills/api-doc-auditor/SKILL.md) for keeping async contracts and generated docs aligned with the source code.
+
 This project uses **Springwolf** to document asynchronous events (Kafka, RabbitMQ, etc.) with **AsyncAPI**.
 Kafka messages on the `user-events` topic follow the **CloudEvents structured JSON** format (`application/cloudevents+json`).
 
@@ -189,6 +203,8 @@ functionalities:
 
 #### Observability Services
 
+**Related skill:** [`observability`](.agents/skills/observability/SKILL.md) for the local OpenTelemetry, Prometheus, Grafana, and Jaeger stack.
+
 See the stack: [docker-compose-observability.yaml](.docker-compose-local/observability.yaml)
 
 - **Grafana**: Visualization and monitoring dashboard, available at [http://localhost:3000](http://localhost:3000).
@@ -206,12 +222,26 @@ These services are orchestrated using Docker Compose to ensure seamless setup an
 
 
 
-## **Architectural Decision Records (ADR)**
+## **Docs**
 
-The project includes a dedicated folder for **Architectural Decision Records (ADR)**, located in the `docs/adr` directory. This folder documents key
-architectural decisions made throughout the project, providing context, rationale, and implications for these choices.
+**Related skills:** [`docs`](.agents/skills/docs/SKILL.md) as the entrypoint, then [`docs-spec`](.agents/skills/docs-spec/SKILL.md), [`docs-adr`](.agents/skills/docs-adr/SKILL.md), [`docs-design-doc`](.agents/skills/docs-design-doc/SKILL.md), [`docs-runbook`](.agents/skills/docs-runbook/SKILL.md), and [`docs-selective-persistence`](.agents/skills/docs-selective-persistence/SKILL.md).
 
-To learn more about the ADRs and explore the documented decisions, refer to the [ADR README](./docs/adr/README.md).
+This template treats documentation as an active part of delivery, guided by repository skills instead of ad-hoc files. The entry point is
+`.agents/skills/docs/SKILL.md`, which decides whether the change needs durable documentation, whether an existing document should be updated, or whether
+explicitly no new document is needed.
+
+The flow works like this:
+
+1. Clarify scope first through definition, spec, or plan mode.
+2. Route the work to the right artifact:
+   - **Spec** for scope, scenarios, constraints, and acceptance criteria (`docs/specs/` when created).
+   - **ADR** for long-lived architectural decisions and guardrails in [`docs/adr/`](./docs/adr/README.md).
+   - **Design Doc** for non-trivial structure, integrations, migrations, or risks in [`docs/design/`](./docs/design/README.md).
+   - **Runbook** for operations, rollout, rollback, support, and incident handling (`docs/runbooks/` when created).
+3. When required, ADRs and design docs are written and aligned before implementation starts.
+4. After planning or execution, `docs-selective-persistence` decides what remains durable and what should stay transient.
+
+This keeps documentation lean, decision-oriented, and connected to execution instead of turning every discussion into a permanent artifact.
 
 
 ## **Contribute**
