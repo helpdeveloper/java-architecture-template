@@ -228,6 +228,8 @@ O fluxo funciona assim:
 
 Com isso, a documentação fica enxuta, orientada a decisão e conectada à execução, em vez de transformar toda conversa em artefato permanente.
 
+Leia mais em [Documentação na era da IA: quando a documentação vira contexto de execução](https://medium.com/@guilherme.zarelli/documenta%C3%A7%C3%A3o-na-era-da-ia-quando-a-documenta%C3%A7%C3%A3o-vira-contexto-de-execu%C3%A7%C3%A3o-cb8d6fdf84ed).
+
 
 ## **Contribua**
 
